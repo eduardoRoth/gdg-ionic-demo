@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title> Personajes de Rick & Morty </ion-title>
+    <ion-buttons slot="end">
+      @if(cargando === true){
+      <ion-spinner color="light"></ion-spinner>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-input
+      label="Pagina"
+      type="number"
+      [value]="pagina"
+      (ionInput)="cargarPorPagina($event)"
+    ></ion-input>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  @for (personaje of personajes; track 'id') {
+  <ion-item>
+    <ion-avatar slot="start">
+      <img [alt]="personaje.name" [src]="personaje.image" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ personaje.name}}</h2>
+    </ion-label>
+    <ion-chip slot="end"> {{ personaje.species }} </ion-chip>
+  </ion-item>
+  }
 </ion-content>
